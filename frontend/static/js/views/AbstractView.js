@@ -7,7 +7,10 @@ export default class {
         document.title = title;
     }
 
-    async getHtml() {
+    controller() {
+    }
+
+    getHtml() {
         return "";
     }
 }

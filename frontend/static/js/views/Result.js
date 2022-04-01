@@ -6,7 +6,10 @@ export default class extends AbstractView {
         this.setTitle("Result");
     }
 
-    async getHtml() {
+    controller() {
+    }
+
+    getHtml() {
         return `
         <h1>Brain Trainer</h1>
         <p>Play the game and train your brain! </p>

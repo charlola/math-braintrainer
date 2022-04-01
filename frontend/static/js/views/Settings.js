@@ -1,4 +1,5 @@
 import AbstractView from "./AbstractView.js";
+import { navigateTo } from "../navigation.js";
 
 export default class extends AbstractView {
     constructor(params) {
@@ -6,7 +7,14 @@ export default class extends AbstractView {
         this.setTitle("Settings");
     }
 
-    async getHtml() {
+    controller() {
+      this.goButton = document.getElementById('go');
+      this.goButton.addEventListener('click', () => {
+        navigateTo('/gamemode')
+      });
+    }
+
+    getHtml() {
         return `
         <h1>Brain Trainer</h1>
         <p>Play the game and train your brain! </p>

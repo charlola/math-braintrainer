@@ -1,6 +1,7 @@
 import GameMode from "./views/GameMode.js";
 import Result from "./views/Result.js";
 import Settings from "./views/Settings.js";
+import { navigateTo } from "./navigation.js";
 
 const pathToRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
 
@@ -11,11 +12,6 @@ const getParams = match => {
     return Object.fromEntries(keys.map((key, i) => {
         return [key, values[i]];
     }));
-};
-
-const navigateTo = url => {
-    history.pushState(null, null, url);
-    router();
 };
 
 const router = async () => {
@@ -44,8 +40,12 @@ const router = async () => {
 
     const view = new match.route.view(getParams(match));
 
-    document.querySelector("#app").innerHTML = await view.getHtml();
+    document.querySelector("#app").innerHTML = view.getHtml();
+    view.controller();
+
 };
+
+window.router = router;
 
 window.addEventListener("popstate", router);
 
