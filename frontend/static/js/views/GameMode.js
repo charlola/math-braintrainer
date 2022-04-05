@@ -8,8 +8,16 @@ export default class extends AbstractView {
     }
 
     controller() {
-    }
+        // timeUp(function() {
+        //     setTimeout(function()
+        //     {alert("Time is up!"); 
+        //     }, this.timeValue*1000);
+        //     //showResults
+        //  });
+    
+    };
 
+    
     getHtml() {
         return `
         <h1>Brain Trainer</h1>
