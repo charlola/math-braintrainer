@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+  <body>
+    <main>
+      <h1>Brain Trainer</h1>
+      <p>Play the game and train your brain! </p>
+      <div class="settings">
+        <h3>Settings</h3>
+        <p> Choose basic operations:</p>
+        <div id="math-operation-selections"></div>
+        <p>Set timer and range:</p>
+        <div>
+          <select id="timer">
+            <option value="30">30 seconds</option>
+            <option value="60">60 seconds</option>
+          </select>
+          <label for="timer"> Time </label>
+        </div>
+          <select id="range">
+            <option value="100">0 - 100</option>
+            <option value="1000">0 - 1000</option>
+          </select>
+          <label for="range">Range</label>
+        </div>
+        <div class="ready" >
+          <p>Are you ready to play?</p>
+          <button id='go'> Let's go!</button>
+        </div>
+      </div>   
+      <div class="game">
+          <h3>Game</h3>
+          <label id="question" for="answer">start Game...</label>
+          <input id="answer"></input>
+          <button id="verify">Verify</button>
+      </div>
+      <div class="results">
+        <h3>Results</h3>
+        <div>POINTS: <span id="points">...</span></div>
+        <div>Total Answers: <span id="total">...</span></div>
+      </div>
+    </main>
+  </body>
+  <script src="app.js"></script>
