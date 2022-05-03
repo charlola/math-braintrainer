@@ -40,13 +40,22 @@ function getSubtractionQuestion(range) {
   };
 }
 
+// function getMultiplicationQuestion(range) {
+//   const numberOne = getRandomInt(3, range/2);
+//   const numberTwo = getRandomInt(2,range/numberOne);
+//   return {
+//     question: `What is ${numberOne} * ${numberTwo}?`,
+//     answer: numberOne * numberTwo,
+//     points: 1,
+//   };
+// }
+
 function getMultiplicationQuestion(range) {
-  const numberOne = getRandomInt(3, range);
-  const numberTwo = Math.ceil(range / numberOne);
-  const numberThree = getRandomInt(2, numberTwo);
+  const numberOne = getRandomInt(2, range/10);
+  const numberTwo = getRandomInt(2,range/numberOne);
   return {
-    question: `What is ${numberOne} * ${numberThree}?`,
-    answer: numberOne * numberThree,
+    question: `What is ${numberOne} * ${numberTwo}?`,
+    answer: numberOne * numberTwo,
     points: 1,
   };
 }
@@ -77,14 +86,14 @@ const MATH_OPERATIONS = [
     label: "Addition",
   },
   {
-    key: MATH_DIVISION,
-    getQuestion: getDivisionQuestion,
-    label: "Division",
-  },
-  {
     key: MATH_SUBTRACTION,
     getQuestion: getSubtractionQuestion,
     label: "Subtraction",
+  },
+  {
+    key: MATH_DIVISION,
+    getQuestion: getDivisionQuestion,
+    label: "Division",
   },
   {
     key: MATH_MULTIPLICATION,
@@ -93,10 +102,20 @@ const MATH_OPERATIONS = [
   },
 ];
 
+// refresh Page
+
+function refreshPage(){
+  window.location.reload();
+} 
+
 // HTML getters
 
 function getVerifyButton() {
   return document.getElementById("verify");
+}
+
+function getNewGameButton() {
+  return document.getElementById("newGame");
 }
 
 function getAnswerInput() {
@@ -121,6 +140,61 @@ function getTotalContainer() {
 function getMathOperationSelections() {
   return document.getElementById("math-operation-selections");
 }
+
+function getGameModeDisplay() {
+  return document.getElementById("gameMode");
+}
+
+function getGameDisplay() {
+  return document.getElementById("game");
+}
+
+function getSettingDisplay() {
+  return document.getElementById("settings");
+}
+
+function getReadyDisplay() {
+  return document.getElementById("ready");
+}
+
+function getNewGameDisplay() {
+  return document.getElementById("newGame");
+}
+
+// Displays
+
+function displayGame() {
+  const gameDisplay = getGameModeDisplay();
+  gameDisplay.style.display = "block";
+  const settingDisplay = getSettingDisplay();
+  settingDisplay.style.display = "none";
+  const readyDisplay = getReadyDisplay();
+  readyDisplay.style.display = "none";
+}
+
+function displaySettings() {
+  const gameDisplay = getGameModeDisplay();
+  gameDisplay.style.display = "none";
+  const settingDisplay = getSettingDisplay();
+  settingDisplay.style.display = "block";
+  const readyDisplay = getReadyDisplay();
+  readyDisplay.style.display = "block";
+  const newGameDisplay = getNewGameDisplay() ;
+  newGameDisplay.style.display = "none";
+}
+
+function displayNewGame() {
+  const newGameDisplay = getNewGameDisplay();
+  newGameDisplay.style.display = "block";
+  const turnGameDisplayOff = getGameDisplay();
+  turnGameDisplayOff.style.display = "none";
+}
+
+
+// switchDisplay
+// function switchDisplay(){
+//   const display = arguments()
+// }
 
 // Initial state
 
@@ -169,18 +243,35 @@ const trueSettings = (settings) => {
   return arrayWithTrueBoolean;
 };
 
+
+
 function timeUp(timeValue) {
   setTimeout(function () {
-    alert("Time is up!");
-  },  timeValue * 1000);
-  //showResults
+
+  if (window.confirm(`Time is up!\nYou have ${gameState.points} correct from ${gameState.total} answers.\n\nDo you want to start a new game?`))
+    {
+       refreshPage()
+
+      // Das wäre ohne RefreshPage(), Punktestand wird zurückgesetzt. Allerdings wird beim nächsten Game nochmal init() gestartet und das alte init() läuft noch.
+      // gameState.points = 0;
+      // gameState.total = 0;
+      // getPointsContainer().innerHTML = gameState.points;
+      // getTotalContainer().innerHTML = gameState.total;
+      // displaySettings();
+    }
+  else
+    {
+        displayNewGame();
+    }
+  }, timeValue*1000);
+
 }
 
 //Question and Operations
 const createQuestion = (settings) => {
   const currentSettings = trueSettings(settings);
-  const questionTypeIndex = Math.floor(Math.random() * currentSettings.length);
-  const questionType = currentSettings[questionTypeIndex].key;
+  window.questionTypeIndex = Math.floor(Math.random() * currentSettings.length);
+  window.questionType = currentSettings[window.questionTypeIndex].key;
 
   const { getQuestion } = MATH_OPERATIONS.find(
     (operation) => operation.key === questionType
@@ -196,7 +287,7 @@ function clearInput() {
 }
 
 function renderLevel(settings) {
-  currentQuestion = createQuestion(settings);
+  let currentQuestion = createQuestion(settings);
   gameState.currentQuestion = currentQuestion;
   getQuestionLabel().innerHTML = gameState.currentQuestion.question;
   getPointsContainer().innerHTML = gameState.points;
@@ -204,22 +295,37 @@ function renderLevel(settings) {
 }
 
 const verify = (settings) => {
-  const answer = Number(getAnswerInput().value);
+  const input = document.getElementById("answer");
+  const answer = Number(input.value);
   if (answer === gameState.currentQuestion.answer) {
     gameState.points += gameState.currentQuestion.points;
   }
+  if (answer !== gameState.currentQuestion.answer) {
+    console.log(answer);
+    console.log(gameState.currentQuestion.answer);
+    console.log(Number(getAnswerInput().value));
+    console.log((getAnswerInput().value));
+    console.log(document.getElementById("answer"));
+  }
   gameState.total += 1;
   renderLevel(settings);
+  clearInput();
 };
 
 const startGame = () => {
   const settings = getSettings();
-
   getVerifyButton().addEventListener("click", () => verify(settings));
+  getAnswerInput().addEventListener("keyup", function (event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      document.getElementById("verify").click();
+    }
+  });
 
   if (trueSettings(settings).length === 0) {
     alert("Please choose some basic operations in settings!");
   } else {
+    displayGame();
     renderLevel(settings);
     timeUp(settings.timeValue);
   }
@@ -227,14 +333,9 @@ const startGame = () => {
 
 function init() {
   renderCheckboxes();
-  getAnswerInput().addEventListener("keyup", function (event) {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      document.getElementById("verify").click();
-    }
-  });
-  getVerifyButton().addEventListener("click", clearInput);
   getGoButton().addEventListener("click", startGame);
+  getNewGameButton().addEventListener("click", refreshPage);
+  // getVerifyButton().addEventListener("click", clearInput);
 }
 
 // Start everything.
