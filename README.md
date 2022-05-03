@@ -1,6 +1,6 @@
 # brain-trainer
 
-Train your math skills with this fun game.
+Clone this repository to modify or extend this game.
 
 # Setup
 
@@ -10,13 +10,5 @@ Train your math skills with this fun game.
 
 # Develop
 
-Run `npm start` to start the development server. The dev server runs at [http://localhost:3000](http://localhost:3000).
+Go to the directory of your new cloned repo and run `npm start` to start the development server. The dev server runs at [http://localhost:3000](http://localhost:3000).
 
-# Tasks
-
-These tasks are just an initial guideline.
-
-1. Reset the initial state (points / total answers) back to 0
-2. Countdown
-3. Hide / Show the screens depending on which state you are in
-4. Answer is always 0.

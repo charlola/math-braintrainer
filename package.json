@@ -1,0 +1,20 @@
+{
+  "name": "brain-trainer",
+  "version": "0.0.1",
+  "description": "Train your math skills",
+  "main": "index.js",
+  "scripts": {
+    "start": "browser-sync start --server 'src' --port 3000 --watch --files 'src'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TN1ck/brain-trainer.git"
+  },
+  "author": "Tom Nick, Charlotte Vaessen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TN1ck/brain-trainer/issues"
+  },
+  "homepage": "https://github.com/TN1ck/brain-trainer#readme"
+}

@@ -170,6 +170,7 @@ function displayGame() {
   settingDisplay.style.display = "none";
   const readyDisplay = getReadyDisplay();
   readyDisplay.style.display = "none";
+  document.getElementById("answer").focus();
 }
 
 function displaySettings() {
