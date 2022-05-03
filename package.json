@@ -4,8 +4,10 @@
   "description": "Train your math skills",
   "main": "index.js",
   "scripts": {
-    "start": "browser-sync start --server 'src' --port 3000 --watch --files 'src'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": {
+      "start": "browser-sync start --server 'src' --port 3000 --watch --files 'src'",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    }
   },
   "repository": {
     "type": "git",
