@@ -72,18 +72,18 @@ main {
     white-space: nowrap;
 }
 
-.footer a {
-    color: inherit;
-    border-bottom: 1px solid var(--secondary);
-}
 
-.logo a:hover,
-.footer a:hover {
+#bottom-right a:hover {
     color:#E37F69;
+    text-decoration: underline;
 }
 
-.footer a:link { 
-  text-decoration: none; 
+#bottom-right a:link { 
+  color:#0d0301;
+}
+
+#bottom-right a:visited {
+  color:#0d0301;
 }
 
 #bottom-right {
@@ -94,7 +94,7 @@ main {
 
 #thanks{
   text-align: center;
-  font-size: 10px;
+  font-size: 11px;
   padding: 5px;
   float: left;
 }

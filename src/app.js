@@ -1,5 +1,5 @@
 // link in footer
-var a = document.getElementById('link');
+var a = document.getElementById("url");
 a.setAttribute("href", "https://ko-fi.com/heypeppa");
 
 
