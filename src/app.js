@@ -1,3 +1,8 @@
+// link in footer
+var a = document.getElementById('link');
+a.setAttribute("href", "https://ko-fi.com/heypeppa");
+
+
 const MATH_ADDITION = "addition";
 const MATH_SUBTRACTION = "subtraction";
 const MATH_MULTIPLICATION = "multiplication";
@@ -342,3 +347,5 @@ function init() {
 // Start everything.
 
 init();
+
+
