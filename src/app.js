@@ -1,6 +1,6 @@
 // link in footer
 var a = document.getElementById("url");
-a.setAttribute("href", "https://ko-fi.com/heypeppa");
+a.setAttribute("href", "https://github.com/charlola/math-braintrainer");
 
 
 const MATH_ADDITION = "addition";
