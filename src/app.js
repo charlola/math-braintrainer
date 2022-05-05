@@ -320,17 +320,16 @@ const verify = (settings) => {
 
 const startGame = () => {
   const settings = getSettings();
-  getVerifyButton().addEventListener("click", () => verify(settings));
-  getAnswerInput().addEventListener("keyup", function (event) {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      document.getElementById("verify").click();
-    }
-  });
-
   if (trueSettings(settings).length === 0) {
     alert("Please choose some basic operations in settings!");
   } else {
+    getVerifyButton().addEventListener("click", () => verify(settings));
+    getAnswerInput().addEventListener("keyup", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("verify").click();
+      }
+    });
     displayGame();
     renderLevel(settings);
     timeUp(settings.timeValue);
