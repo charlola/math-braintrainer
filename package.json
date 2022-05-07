@@ -13,8 +13,5 @@
   },
   "author": "Tom Nick, Charlotte Vaessen",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/TN1ck/brain-trainer/issues"
-  },
-  "homepage": "https://github.com/TN1ck/brain-trainer#readme"
+  "homepage": "https://github.com/charlola/math-braintrainer"
 }
